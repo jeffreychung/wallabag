@@ -32,10 +32,11 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function getBuilderForAllByUser($userId)
+    public function getBuilderForAllByUser($userId, $sortBy = 'id', $direction = 'DESC')
     {
         return $this
             ->getBuilderByUser($userId)
+            ->orderBy('e.'.$sortBy, $direction)
         ;
     }
 
@@ -46,11 +47,12 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function getBuilderForUnreadByUser($userId)
+    public function getBuilderForUnreadByUser($userId, $sortBy = 'id', $direction = 'DESC')
     {
         return $this
             ->getBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
+            ->orderBy('e.'.$sortBy, $direction)
         ;
     }
 
@@ -61,11 +63,12 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function getBuilderForArchiveByUser($userId)
+    public function getBuilderForArchiveByUser($userId, $sortBy = 'id', $direction = 'DESC')
     {
         return $this
             ->getBuilderByUser($userId)
             ->andWhere('e.isArchived = true')
+            ->orderBy('e.'.$sortBy, $direction)
         ;
     }
 
@@ -76,11 +79,12 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function getBuilderForStarredByUser($userId)
+    public function getBuilderForStarredByUser($userId, $sortBy = 'id', $direction = 'DESC')
     {
         return $this
             ->getBuilderByUser($userId)
             ->andWhere('e.isStarred = true')
+            ->orderBy('e.'.$sortBy, $direction)
         ;
     }
 

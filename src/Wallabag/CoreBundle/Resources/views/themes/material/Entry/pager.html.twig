@@ -1,8 +1,27 @@
 {% block pager %}
-    <div class="results clearfix">
+    <div class="results clearfix row">
         <div class="nb-results left">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
         </div>
+        <div class="input-field col s4">
+            <select>
+                <option value="" disabled selected>Creation date</option>
+                <option value="1">Sort by creation date</option>
+                <option value="2">Sort by title</option>
+                <option value="3">Sort by last updated</option>
+            </select>
+            <label>Sort by</label>
+        </div>
+
+        <div class="switch">
+            <label>
+                Ascendant
+                <input type="checkbox">
+                <span class="lever"></span>
+                Descendant
+            </label>
+        </div>
+
         {% if entries.getNbPages > 1 %}
             {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
         {% endif %}
